@@ -409,6 +409,8 @@
       commentContent : '.Gw.Gm .vFgtwf',
       sharingContent : '.DIcL3e .vFgtwf',
       content : '.vFgtwf',
+      contentWrapper : '.WamaFb',
+      postContentWrapper : '.WamaFb.DIcL3e',
       post : '.gv',
       mainPost : '.ci.gv',
       sharedPost : '.am .gv',

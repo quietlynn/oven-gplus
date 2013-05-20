@@ -92,8 +92,14 @@
       a = $(a);
       if (title == '[EventImage]') title = '[Event ' + a.text() + ']';
     } else {
-      a = $('<a/>').css('margin-left', '10px')
-      body.append(a);
+      a = $('<a/>');
+      var wrapper = body.closest('postContentWrapper');
+      if (wrapper) {
+        wrapper.parent().append(a);
+      } else {
+        a.css('margin-left', '10px');
+        body.append(a);
+      }
     }
     
     a.attr('href', url)
