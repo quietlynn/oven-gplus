@@ -497,15 +497,19 @@
   
   $.gplus.keyboard.addManual('Post', '+', '+1 current post');
   
-  // share This post
-  $.gplus.keyboard.registerKey('t', function () {
+  // Share this post
+  var shareThisPost = function () {
     var update = $.gplus.page().find('activeUpdate').first();
     if (update.length > 0) {
       update.share();
     }
-  });
+  };
+  // "S" as in Google Reader. RIP Google Reader.
+  $.gplus.keyboard.registerKey('S', shareThisPost);
+  // The old shortcut key for sharing. Going away soon.
+  $.gplus.keyboard.registerKey('t', shareThisPost);
   
-  $.gplus.keyboard.addManual('Post', 't', 'Share current post');
+  $.gplus.keyboard.addManual('Post', 'S', 'Share current post');
   
   // Mute
   $.gplus.keyboard.registerKey('m', function () {
@@ -520,11 +524,26 @@
   $.gplus.keyboard.registerKey('a', function () {
     var update = $.gplus.page().find('activeUpdate').first();
     if (update.length > 0) {
-      update.find('activityButton').doClick();
+      var flip = update.find('flipCardButton');
+      var hidden = flip.closest('[aria-hidden]');
+      if (flip && hidden.attr('aria-hidden') === 'false') {
+        flip.doClick();
+      } else {
+        update.find('activityButton').doClick();
+      }
     }
   });
   
   $.gplus.keyboard.addManual('Post', 'a', 'Show/hide activity on this post');
+
+  $.gplus.keyboard.registerKey('u', function () {
+    var update = $.gplus.page().find('activeUpdate').first();
+    if (update.length > 0) {
+      update.focus().doKeypress('j').doKeypress('k');
+    }
+  });
+
+  $.gplus.keyboard.addManual('Post', 'u', 'Set focus on the parent post');
 
   // Enable n,p in Notification frame. (G+ bug?)
   // TODO: Handle comment expansion.

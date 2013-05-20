@@ -165,10 +165,12 @@
       target.dispatchEvent(evt);
     });
   };
-  $.fn.doKeypress = function () {
+  $.fn.doKeypress = function (keychar) {
+    if (!keychar) keychar = 'e';
     return this.each(function (_, target) {
       var evt = target.ownerDocument.createEvent('KeyboardEvent');
-      evt.initEvent('keypress', true, true, window, 0, 0, 0, 0, 0, 'e'.charCodeAt(0));
+      evt.initEvent('keypress', true, true, window, 0, 0, 0, 0, 0,
+        keychar.charCodeAt(0));
       target.dispatchEvent(evt);
     });
   };
@@ -468,7 +470,8 @@
       postEditCancel: '.Bw',
       notificationFrameWrapper: '#gbwc',
       authorProfileLink: '.Sg.Ob',
-      activityButton: '.rE'
+      activityButton: '.rE',
+      flipCardButton: '.Lfr5Ie'
     },
     attrs : {
       userId : 'oid'

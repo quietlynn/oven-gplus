@@ -85,6 +85,14 @@ ui.addStyle = ->
       color: #222;
     }
 
+    .ext-oven-ui-snippet-display {
+      font-size: 1.5em;
+    }
+
+    .ext-oven-ui-snippet-version {
+      color: #ccc;
+    }
+
     .ext-oven-ui-create {
       display: none;
     }
@@ -254,6 +262,9 @@ ui.updateSnippetList = ->
     name_span = $ '<div class="ext-oven-ui-snippet-display"/>'
     name_span.text data.display ? data.name
     row.append name_span
+    ver_span = $ '<div class="ext-oven-ui-snippet-version"/>'
+    ver_span.text 'version: ' + data.version
+    row.append ver_span
     row.append $ '''
       <span class="ext-oven-ui-snippet-action">
         <label>
