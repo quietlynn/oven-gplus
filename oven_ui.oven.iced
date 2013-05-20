@@ -33,21 +33,17 @@ ui.addStyle = ->
       color: white !important;
     }
 
-    .ext-oven-ui-settings {
-      left: 0 !important;
-      width: 100% !important;
+    .ext-oven-ui-dialog {
+      position: fixed !important;
+      left: 30% !important;
+      width: 40% !important;
       height: auto !important;
-      bottom: 0 !important;
+      max-height: 80% !important;
       text-align: center;
     }
 
-    .ext-oven-ui-close {
-      position: fixed;
-      display: block;
-      right: 0;
-      margin: auto;
-      margin-right: 10px;
-      cursor: pointer;
+    .ext-oven-ui-settings {
+      padding: 5px 30px 30px;
     }
 
     .ext-oven-ui-notification {
@@ -65,18 +61,14 @@ ui.addStyle = ->
     .ext-oven-ui-snippet-list {
       overflow: auto;
       height: 80%;
-      -webkit-column-width: 300px !important;
-      -moz-column-width: 300px !important;
-      column-width: 300px !important;
     }
 
     .ext-oven-ui-snippet {
       padding: 10px;
-      border: #ccc 1px solid;
       margin: 10px;
-      -webkit-column-break-inside: avoid !important;
-      -moz-break-inside: avoid !important;
-      break-inside: avoid !important;
+      border: #ccc 1px solid;
+      background-color: #f5f5f5;
+      text-align: left;
     }
 
     .ext-oven-ui-snippet.disabled {
@@ -90,7 +82,12 @@ ui.addStyle = ->
     }
 
     .ext-oven-ui-snippet-version {
+      margin-left: 20px;
       color: #ccc;
+    }
+
+    .ext-oven-ui-snippet-action {
+      float: right;
     }
 
     .ext-oven-ui-create {
@@ -108,6 +105,37 @@ ui.addStyle = ->
       overflow-y: auto;
       background-color: rgba(255,255,255,0.25);
     }
+
+    .ext-oven-actions {
+      padding: 20px;
+    }
+    
+    .ext-oven-ui-dialog .c-b {
+      display: inline-block;
+    }
+
+    .ext-oven-ui-button-main {
+      -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.05);
+      box-shadow: 0 1px 0 rgba(0,0,0,.05);
+      background-color: #53a93f;
+      background-image: -webkit-linear-gradient(top,transparent,transparent);
+      background-image: linear-gradient(top,transparent,transparent);
+      border: 1px solid transparent;
+      color: #fff;
+      text-shadow: none;
+    }
+
+    .ext-oven-ui-button-danger {
+      background-color: #dd4b39;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    .ext-oven-ui-snippet-remove {
+      margin-right: 0;
+      margin-top: -10px;
+    }
+
   '''
 
   if typeof(GM_addStyle) == 'undefined'
@@ -122,23 +150,29 @@ ui.addStyle = ->
 ui.showDialog = ->
   if not ui.dialog?
     dialog = $ '''
-      <div class="sbb ext-oven-ui-settings" role="alert">
-        <div class="ext-oven-ui-close">[X]</div>
-        <div class="tbb">Oven ~ Google+ Userscript Framework</div>
-        <div class="ext-oven-ui-notification"></div>
-        <div class="ext-oven-ui-action">
-          <button class="a-f-e c-b c-b-T ext-oven-ui-action-update">Update</button>
-          <button class="a-f-e c-b c-b-T ext-oven-ui-action-install">Install Snippet</button>
-          <button class="a-f-e c-b c-b-T ext-oven-ui-action-create">Create Snippet</button>
-          <button class="a-f-e c-b c-b-T ext-oven-ui-action-panic">PANIC</button>
+      <div class="U-L Tk ext-oven-ui-dialog" tabindex="0" role="dialog">
+        <div class="U-L-Y">
+          <span class="U-L-Y-A">Oven Snippets</span>
         </div>
-        <div class="ext-oven-ui-snippet-list"></div>
-        <div class="ext-oven-ui-create">
-          <div class="ext-oven-ui-create-code" contenteditable="plaintext-only">
+        <div class="U-L-x">
+          <div class="ext-oven-actions">
+            <div role="button" class="c-b c-b-T ext-oven-ui-action-update">Update</div>
+            <div role="button" class="c-b c-b-T ext-oven-ui-action-install">Install Snippet</div>
+            <div role="button" class="c-b c-b-T ext-oven-ui-action-create">Create Snippet</div>
+            <div role="button" class="c-b c-b-T ext-oven-ui-action-panic ext-oven-ui-button-danger">PANIC</div>
+            <div role="button" class="c-b c-b-T ext-oven-ui-close ext-oven-ui-button-main">Close</div>
           </div>
-          <p>
-            <button class="a-f-e c-b c-b-T ext-oven-ui-create-test">Test</button>
-          </p>
+          <div class="ext-oven-ui-settings">
+            <div class="ext-oven-ui-snippet-list"></div>
+            <div class="ext-oven-ui-create">
+              <div class="ext-oven-ui-create-code" contenteditable="plaintext-only">
+              </div>
+              <p>
+                <button class="a-f-e c-b c-b-T ext-oven-ui-create-test ext-oven-ui-button-main">Test</button>
+              </p>
+            </div>
+            <div class="ext-oven-ui-notification"></div>
+          </div>
         </div>
       </div>
     '''
@@ -259,10 +293,10 @@ ui.updateSnippetList = ->
     continue if data.builtin or not data.name
     row = $ '<div class="ext-oven-ui-snippet"></div>'
     row.attr 'data-ext-oven-ui-name', name
-    name_span = $ '<div class="ext-oven-ui-snippet-display"/>'
+    name_span = $ '<span class="ext-oven-ui-snippet-display"/>'
     name_span.text data.display ? data.name
     row.append name_span
-    ver_span = $ '<div class="ext-oven-ui-snippet-version"/>'
+    ver_span = $ '<span class="ext-oven-ui-snippet-version"/>'
     ver_span.text 'version: ' + data.version
     row.append ver_span
     row.append $ '''
@@ -271,7 +305,7 @@ ui.updateSnippetList = ->
           <input type="checkbox" class="ext-oven-ui-snippet-enabled"/>
           Enable
         </label>
-        <button class="ext-oven-ui-snippet-remove">Remove</button>
+        <button class="c-b c-b-T ext-oven-ui-snippet-remove">Remove</button>
       </span>
     '''
     if not data.disabled
