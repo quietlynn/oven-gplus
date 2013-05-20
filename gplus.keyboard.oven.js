@@ -543,6 +543,28 @@
     }
   });
 
+  $.gplus.keyboard.registerKey('I', function () {
+    var en = null;
+    var update = $.gplus.page().find('activeUpdate').first();
+    if (update.length > 0) { 
+      var comment = update.getActiveComment();
+      if (comment.length > 0) {
+        en = comment.find('content').find('a').first();
+      } else {
+        var mediaArea = update.find('mediaArea');
+        var en = mediaArea.find('a[rel="nofollow"]').first();
+        if (!en) en = mediaArea.find('a').first();
+        if (!en) en = update.find('postContent').find('a').first();
+      }
+    }
+    if (en) {
+      en.doClick();
+    } else {
+      return false;
+    }
+  });
+  $.gplus.keyboard.addManual('Post', 'I', 'Open a link in this post/comment');
+
   $.gplus.keyboard.addManual('Post', 'u', 'Set focus on the parent post');
 
   // Enable n,p in Notification frame. (G+ bug?)
