@@ -53,41 +53,8 @@ ui.addStyle = ->
       display: none;
     }
 
-    .ext-oven-ui-action {
-      margin: 10px 20px;
-      display: inline-block;
-    }
-
-    .ext-oven-ui-snippet-list {
-      overflow: auto;
-      height: 80%;
-    }
-
-    .ext-oven-ui-snippet {
-      padding: 10px;
-      margin: 10px;
-      border: #ccc 1px solid;
-      background-color: #f5f5f5;
-      text-align: left;
-    }
-
-    .ext-oven-ui-snippet.disabled {
-      margin-left: 20px !important;
-      background-color: #aaa;
-      color: #222;
-    }
-
-    .ext-oven-ui-snippet-display {
-      font-size: 1.5em;
-    }
-
-    .ext-oven-ui-snippet-version {
-      margin-left: 20px;
-      color: #ccc;
-    }
-
-    .ext-oven-ui-snippet-action {
-      float: right;
+    .ext-oven-ui-actions {
+      padding: 10px 20px;
     }
 
     .ext-oven-ui-create {
@@ -105,9 +72,47 @@ ui.addStyle = ->
       overflow-y: auto;
       background-color: rgba(255,255,255,0.25);
     }
+    .ext-oven-ui-snippet-list {
+      overflow: auto;
+      height: 80%;
+    }
 
-    .ext-oven-actions {
-      padding: 10px 20px;
+    .ext-oven-ui-snippet {
+      padding: 10px;
+      margin: 10px;
+      border: #ccc 1px solid;
+      background-color: #f5f5f5;
+      text-align: left;
+    }
+
+    .ext-oven-ui-snippet::after {
+      content: " ";
+      display: block; 
+      height: 0; 
+      clear: both;
+    }
+
+    .ext-oven-ui-snippet.disabled {
+      margin-left: 20px !important;
+      background-color: #aaa;
+      color: #222;
+    }
+
+    .ext-oven-ui-snippet-display {
+      font-size: 1.5em;
+      display: inline-block;
+      margin-right: 20px;
+    }
+
+    .ext-oven-ui-snippet-version {
+      color: #ccc;
+    }
+
+    .ext-oven-ui-snippet-action {
+      white-space: nowrap;
+      display: inline-block;
+      margin-left: 20px;
+      float: right;
     }
     
     .ext-oven-ui-dialog .c-b {
@@ -156,7 +161,7 @@ ui.showDialog = ->
           <span class="U-L-Y-A">Oven Snippets</span>
         </div>
         <div class="U-L-x">
-          <div class="ext-oven-actions">
+          <div class="ext-oven-ui-actions">
             <div role="button" class="c-b c-b-T ext-oven-ui-action-update">Update</div>
             <div role="button" class="c-b c-b-T ext-oven-ui-action-install">Install Snippet</div>
             <div role="button" class="c-b c-b-T ext-oven-ui-action-create">Create Snippet</div>
