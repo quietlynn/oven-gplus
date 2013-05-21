@@ -198,7 +198,7 @@
       
       var it = setInterval(function () {
         ed.doClick().doKeypress();
-        if (submit.attr('aria-disabled') != 'false') {
+        if (submit.attr('aria-disabled') !== 'true') {
           clearInterval(it);
         };
         submit.doClick();

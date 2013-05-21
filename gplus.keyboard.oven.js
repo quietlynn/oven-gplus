@@ -30,6 +30,7 @@
 /*
   OVEN::name org.quietmusic.project.gplus.keyboard
   OVEN::display Google+ Keyboard Shortcuts
+  OVEN::version 0.1
   OVEN::require jquery.gplus https://github.com/quietlynn/oven-gplus/raw/master/jquery.gplus.oven.js
 */
 
@@ -267,12 +268,16 @@
       // Firefox does not cancel keypress event on preventDefault()
       // A dirty way to detect Firefox.
       if (!!window.mozRequestAnimationFrame) {
+        var once = false;
         var handler = e.target.addEventListener("keypress", function (ee) {
+          if (once) return;
+          once = true;
           ee.stopImmediatePropagation();
           ee.preventDefault();
-          ee.target.removeEventListener("keypress", handler, true);
+          console.log('prevent');
+          e.target.removeEventListener("keypress", handler, false);
           return false;
-        }, true);
+        }, false);
       }
       
       // Enter sequence mode to wait for more keys.
@@ -365,8 +370,9 @@
       columns.append(category);
     }
     var nav = $('[role="navigation"]');
+    var scrollTop = document.body.scrollTop + document.documentElement.scrollTop
     dialog.css('top',
-      nav.offset().top + nav[0].offsetHeight - document.body.scrollTop);
+      nav.offset().top + nav[0].offsetHeight - scrollTop);
     dialog.appendTo('body');
     // Press any key to dismiss.
     return function () {
@@ -374,19 +380,6 @@
     };
   });
   
-  // Prevent the parent page from handling the ? key.
-  // This workaround is needed because Firefox's key event model is wrong.
-  document.addEventListener('keypress', function (e) {
-    if (e.which == 63 && e.shiftKey) {
-      if ($(e.target).closest('[contenteditable], input').length > 0) {
-        return;
-      }
-      e.preventDefault();
-      e.stopImmediatePropagation();
-      return false;
-    }
-  });
-
   var gotoTop = function () {
     $('[role="navigation"]').doClick();
   };
