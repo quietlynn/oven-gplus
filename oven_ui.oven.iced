@@ -74,8 +74,7 @@ ui.addStyle = ->
 
     .ext-oven-ui-create-code {
       display: inline-block;
-      width: 40%;
-      min-width: 800px;
+      width: 80%;
       max-height: 800px;
       padding: 20px;
       border: silver 1px solid;
