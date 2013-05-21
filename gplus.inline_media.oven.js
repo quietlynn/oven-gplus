@@ -179,8 +179,8 @@
           break;
       }
       
-      var post = mediaArea.closest('post');
-      var wrapper = post.find('postContentWrapperWrapper');
+      var update = mediaArea.closest('update');
+      var wrapper = update.find('postContentWrapperWrapper');
       if (wrapper.length == 0) return;
 
       var a = $('<a/>');
@@ -194,7 +194,7 @@
         .hide();
       mediaArea.attr('data-inline-media-url', url);
       mediaArea.attr('data-inline-media-title', title);
-      post.dynamicSelect(
+      update.dynamicSelect(
           $.gplus.selectors.combine('postContent', 'addPhotoToEventText', 'eventText'),
           insertLink);
     }
