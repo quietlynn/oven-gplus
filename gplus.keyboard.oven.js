@@ -166,6 +166,7 @@
     if (e.shiftKey) keyStr = 'shift+' + keyStr;
     if (e.ctrlKey) keyStr = 'ctrl+' + keyStr;
     if (e.altKey) keyStr = 'alt+' + keyStr;
+    if (e.metaKey) keyStr = 'meta+' + keyStr;
     
     return keyStr;
   };
