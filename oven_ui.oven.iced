@@ -127,14 +127,14 @@ ui.addStyle = ->
     }
 
     .ext-oven-ui-button-danger {
-      background-color: #dd4b39;
-      color: #fff;
-      font-weight: bold;
+      background-color: #dd4b39 !important;
+      color: #fff !important;
+      font-weight: bold !important;
     }
 
     .ext-oven-ui-snippet-remove {
       margin-right: 0;
-      margin-top: -10px;
+      margin-top: -10px !important;
     }
 
   '''
