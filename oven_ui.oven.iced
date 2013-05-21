@@ -210,7 +210,8 @@ ui.showDialog = ->
       ui.notify "Snippet #{data.name} was installed and activated."
 
     dialog.on 'click', '.ext-oven-ui-action-create', (e) ->
-      $('.ext-oven-ui-create-code', dialog).css 'max-height', 0.8 *dialog.height()
+      $('.ext-oven-ui-create-code', dialog).css('max-height',
+        0.8 * dialog.height())
       $(e.target).toggleClass('c-b-da').toggleClass('c-b-T')
       $('.ext-oven-ui-snippet-list', dialog).slideToggle()
       $('.ext-oven-ui-create', dialog).slideToggle()
@@ -276,8 +277,9 @@ ui.showDialog = ->
 
   ui.updateSnippetList()
   nav = $ '[role="navigation"]'
+  scrollTop = document.body.scrollTop + document.documentElement.scrollTop
   ui.dialog.css('top',
-    nav.offset().top + nav[0].offsetHeight - document.body.scrollTop)
+    nav.offset().top + nav[0].offsetHeight - scrollTop)
   
   ui.dialog.show()
 
