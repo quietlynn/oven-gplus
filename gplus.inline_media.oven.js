@@ -204,7 +204,7 @@
     $.gplus.keyboard.registerKey('i', function () {
       var update = $.gplus.page().find('activeUpdate').first();
       if (update.length > 0) { 
-        var mediaArea = update.find('mediaArea');
+        var mediaArea = update.find('.ext-inline-media-area');
         mediaArea.toggleClass('ext-inline-media-panel');
         if (mediaArea.is('.ext-inline-media-panel')) {
           mediaArea.hide();
