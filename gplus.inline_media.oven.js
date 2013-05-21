@@ -77,30 +77,8 @@
     hangout.innerHTML = '<a>Hangouts On Air</a>';
   });
   
-  var insertLink = function (body) {
-    if (body.closest('*[data-ext-inline-media]').length > 0) return;
-    var update = body.closest('update');
-    var mediaArea = update.find('.ext-inline-media-area');
-    var url = mediaArea.attr('data-inline-media-url');
-    var title = mediaArea.attr('data-inline-media-title');
-    
-    var a = null;
-    $('a', body).each(function(_, anchor) {
-      if(anchor.href == url) a = anchor;
-    });
-    if (a != null) {
-      a = $(a);
-      if (title == '[EventImage]') title = '[Event ' + a.text() + ']';
-    } else {
-      a = $('<a/>');
-      var wrapper = body.closest('postContentWrapper');
-      if (wrapper) {
-        wrapper.parent().append(a);
-      } else {
-        a.css('margin-left', '10px');
-        body.append(a);
-      }
-    }
+  var decorateLink = function (a, url, title) {
+    if (title == '[EventImage]') title = '[Event ' + a.text() + ']';
     
     a.attr('href', url)
       .attr('target', '_blank')
@@ -115,8 +93,23 @@
       }).mineclick(function () {
         mediaArea.toggleClass('ext-inline-media-panel');
       });
+  };
+
+  var insertLink = function (body) {
+    if (body.closest('*[data-ext-inline-media]').length > 0) return;
+    var update = body.closest('update');
+    var mediaArea = update.find('.ext-inline-media-area');
+    var url = mediaArea.attr('data-inline-media-url');
+    var title = mediaArea.attr('data-inline-media-title');
     
-    body.attr('data-ext-inline-media', 'linkInserted');
+    var a = null;
+    $('a', body).each(function(_, anchor) {
+      if(anchor.href == url) a = anchor;
+    });
+    if (a == null) return;
+    $('.ext-inline-media-temp-link', update).remove();
+    a = $(a);
+    decorateLink(a, url, title);
   };
   
   $.gplus.page().dynamicSelect(
@@ -186,12 +179,22 @@
           break;
       }
       
-      mediaArea.addClass('ext-inline-media-area');
-      mediaArea.addClass('ext-inline-media-panel').hide();
+      var post = mediaArea.closest('post');
+      var wrapper = post.find('postContentWrapperWrapper');
+      if (wrapper.length == 0) return;
+
+      var a = $('<a/>');
+      decorateLink(a, url, title);
+      a.addClass('ext-inline-media-temp-link');
+      wrapper.last().append(a);
+
+      mediaArea
+        .addClass('ext-inline-media-area')
+        .addClass('ext-inline-media-panel')
+        .hide();
       mediaArea.attr('data-inline-media-url', url);
       mediaArea.attr('data-inline-media-title', title);
-      var update = mediaArea.closest('update');
-      update.dynamicSelect(
+      post.dynamicSelect(
           $.gplus.selectors.combine('postContent', 'addPhotoToEventText', 'eventText'),
           insertLink);
     }

@@ -411,6 +411,7 @@
       content : '.vFgtwf',
       contentWrapper : '.WamaFb',
       postContentWrapper : '.WamaFb.DIcL3e',
+      postContentWrapperWrapper: '.Ob8Frf',
       post : '.gv',
       mainPost : '.ci.gv',
       sharedPost : '.am .gv',
