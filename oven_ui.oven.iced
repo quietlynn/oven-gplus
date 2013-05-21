@@ -107,7 +107,7 @@ ui.addStyle = ->
     }
 
     .ext-oven-actions {
-      padding: 20px;
+      padding: 10px 20px;
     }
     
     .ext-oven-ui-dialog .c-b {
@@ -123,6 +123,7 @@ ui.addStyle = ->
       border: 1px solid transparent;
       color: #fff;
       text-shadow: none;
+      margin-top: 10px;
     }
 
     .ext-oven-ui-button-danger {
@@ -333,7 +334,7 @@ ui.processLink = (el) ->
     e.preventDefault()
     e.stopImmediatePropagation()
 
-    url = e.target.href
+    url = e.currentTarget.href
     await oven.manager.install null, url, defer(data), 'bypass_cache'
     return unless data
     oven.manager.save()
