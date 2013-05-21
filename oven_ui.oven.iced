@@ -352,7 +352,7 @@ ui.watchInstallLinks = () ->
     for el in result
       ui.processLink el
 
-  MutationObserver = window.MutationOvserver ? window.WebKitMutationObserver
+  MutationObserver = window.MutationObserver ? window.WebKitMutationObserver
   observer = new MutationObserver (mutations) ->
     mutations.forEach (mutation) ->
       if mutation.type == 'childList' and mutation.addedNodes
