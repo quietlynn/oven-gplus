@@ -33,6 +33,17 @@ ui.addStyle = ->
       color: white !important;
     }
 
+    .ext-oven-ui-dialog-cover {
+      position : fixed;
+      width : 100%;
+      height : 100%;
+      left : 0;
+      top : 0;
+      z-index: 1100;
+      background-color: #fff;
+      opacity: 0.75;
+    }
+
     .ext-oven-ui-dialog {
       position: fixed !important;
       left: 30% !important;
@@ -122,11 +133,11 @@ ui.addStyle = ->
     .ext-oven-ui-button-main {
       -webkit-box-shadow: 0 1px 0 rgba(0,0,0,.05);
       box-shadow: 0 1px 0 rgba(0,0,0,.05);
-      background-color: #53a93f;
+      background-color: #53a93f !important;
       background-image: -webkit-linear-gradient(top,transparent,transparent);
       background-image: linear-gradient(top,transparent,transparent);
       border: 1px solid transparent;
-      color: #fff;
+      color: #fff !important;
       text-shadow: none;
       margin-top: 10px;
     }
@@ -194,8 +205,13 @@ ui.showDialog = ->
           '<div style="background-color: green; color: white;">Hello, world!</div>');
       });
     """
+    dialog_cover = $ '<div class="ext-oven-ui-dialog-cover"/>'
+    dialog_cover.on 'click', ->
+      dialog.hide()
+      dialog_cover.hide()
     dialog.on 'click', '.ext-oven-ui-close', ->
       dialog.hide()
+      dialog_cover.hide()
 
     dialog.on 'click', '.ext-oven-ui-action-update', (e) ->
       e.target.disabled = true
@@ -278,8 +294,10 @@ ui.showDialog = ->
           ui.notify 'Changes will be applied once you reload the page.'
         oven.manager.save()
         ui.updateSnippetList()
+    dialog_cover.appendTo 'body'
     dialog.appendTo 'body'
     ui.dialog = dialog
+    ui.dialog_cover = dialog_cover
 
   ui.updateSnippetList()
   nav = $ '[role="navigation"]'
@@ -288,6 +306,7 @@ ui.showDialog = ->
     nav.offset().top + nav[0].offsetHeight - scrollTop)
   
   ui.dialog.show()
+  ui.dialog_cover.show()
 
 ui.notify = (message) ->
   notification = ui.dialog.find('.ext-oven-ui-notification')
