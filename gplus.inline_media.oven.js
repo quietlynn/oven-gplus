@@ -121,8 +121,7 @@
     var url = null;
     var title = null;
     
-    mediaArea.find('sharedPhoto').eachElement(function (photo) {
-      var anchor = photo.find('sharedPhotoLink');
+    mediaArea.find('sharedPhotoLink').eachElement(function (anchor) {
       if (anchor.length == 0) {
         anchor = photo.closest('a');
         if (anchor.length == 0) return;
@@ -135,13 +134,10 @@
       url = anchor[0].href;
     });
     
-    
-    if (url == null) {
-      mediaArea.find('sharedExternalLink').eachElement(function (externalLink) {
-        url = url || externalLink[0].href;
-        title = externalLink.text();
-      });
-    }
+    mediaArea.find('sharedExternalLink').eachElement(function (externalLink) {
+      url = url || externalLink[0].href;
+      if (!title || title === '[Image]') title = externalLink.text() || title;
+    });
     
     var albumTitle = mediaArea.find('albumTitle');
     if (albumTitle.length > 0) {
