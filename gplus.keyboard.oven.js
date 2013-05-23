@@ -442,7 +442,7 @@
         case 's': // pageS
           $('[navid="7"] a').doClick();
           break;
-        case 'm': // coMmunities
+        case 'u': // commUnities
           $('[navid="8"] a').doClick();
           break;
         case 'l': // Local
@@ -469,7 +469,7 @@
   $.gplus.keyboard.addManual('Goto', 'ga', 'hAngout');
   $.gplus.keyboard.addManual('Goto', 'gx', 'eXplore');
   $.gplus.keyboard.addManual('Goto', 'gs', 'pageS');
-  $.gplus.keyboard.addManual('Goto', 'gm', 'coMmunities');
+  $.gplus.keyboard.addManual('Goto', 'gu', 'commUnities');
   $.gplus.keyboard.addManual('Goto', 'gl', 'Local');
   $.gplus.keyboard.addManual('Goto', 'ge', 'Events');
   $.gplus.keyboard.addManual('Goto', 'gp', 'Profile');
