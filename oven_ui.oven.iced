@@ -379,19 +379,23 @@ ui.watchInstallLinks = () ->
       ui.processLink el
 
   MutationObserver = window.MutationObserver ? window.WebKitMutationObserver
-  observer = new MutationObserver (mutations) ->
-    mutations.forEach (mutation) ->
-      if mutation.type == 'childList' and mutation.addedNodes
-          for el in mutation.addedNodes
-            if $(el).is(uni_selector)
-              ui.processLink el
-            if el.querySelector and (result = el.querySelectorAll(uni_selector))
-              for ell in result
-                ui.processLink ell
+  if !MutationObserver and unsafeWindow?
+    MutationObserver = (unsafeWindow.MutationObserver ?
+      unsafeWindow.WebKitMutationObserver)
+  if MutationObserver
+    observer = new MutationObserver (mutations) ->
+      mutations.forEach (mutation) ->
+        if mutation.type == 'childList' and mutation.addedNodes
+            for el in mutation.addedNodes
+              if $(el).is(uni_selector)
+                ui.processLink el
+              if el.querySelector and (result = el.querySelectorAll(uni_selector))
+                for ell in result
+                  ui.processLink ell
 
-  observer.observe document,
-    childList: true
-    subtree: true
+    observer.observe document,
+      childList: true
+      subtree: true
 
 ui.addStyle()
 ui.watchInstallLinks()
