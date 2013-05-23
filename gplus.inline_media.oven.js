@@ -77,7 +77,7 @@
     hangout.innerHTML = '<a>Hangouts On Air</a>';
   });
   
-  var decorateLink = function (a, url, title) {
+  var decorateLink = function (a, mediaArea, url, title) {
     if (title == '[EventImage]') title = '[Event ' + a.text() + ']';
     
     a.attr('href', url)
@@ -109,7 +109,7 @@
     if (a == null) return;
     $('.ext-inline-media-temp-link', update).remove();
     a = $(a);
-    decorateLink(a, url, title);
+    decorateLink(a, mediaArea, url, title);
   };
   
   $.gplus.page().dynamicSelect(
@@ -180,7 +180,7 @@
       if (wrapper.length == 0) return;
 
       var a = $('<a/>');
-      decorateLink(a, url, title);
+      decorateLink(a, mediaArea, url, title);
       a.addClass('ext-inline-media-temp-link');
       wrapper.last().append(a);
 
