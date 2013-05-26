@@ -458,7 +458,7 @@
       mentionButton : '.Ug',
       mentionPrefix : '.JI',
       newUpdate : '[guidedhelpid="sharebox"]',
-      closedNewUpdate : '.We',
+      closedNewUpdate : '[guidedhelpid="sharebox_launcher"]',
       plusOne : '[g\\:entity]',
       postPlusOne : '[g\\:entity^="buzz:"]',
       commentPlusOne : '.Xia',

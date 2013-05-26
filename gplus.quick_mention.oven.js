@@ -170,7 +170,7 @@
       
       if (editor.length === 0) {
         editor = $.gplus.page().find('contentEditor').filter(function (_, ed) {
-          return !$.gplus.wrap(ed).closest('newUpdate').is('closedNewUpdate');
+          return $.gplus.wrap(ed).closest('closedNewUpdate').length === 0;
         }).last();
         
         if (editor.length > 0) node = editor;
