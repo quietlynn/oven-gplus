@@ -152,6 +152,27 @@ ui.addStyle = ->
       margin-top: -10px !important;
     }
 
+    .GM {
+      cursor: pointer;
+    }
+
+    .GM::after {
+      content: "Manage Snippets";
+      border-bottom: 2px solid transparent;
+      color: #373737;
+      display: inline-block;
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 0 18px;
+      max-width: 180px;
+      min-width: 20px;
+      overflow: hidden;
+      padding: 13px 0 10px 0;
+      text-overflow: ellipsis;
+      vertical-align: top;
+      white-space: nowrap;
+      border-color: #53a93f;
+    }
   '''
 
   if typeof(GM_addStyle) == 'undefined'
@@ -299,7 +320,7 @@ ui.showDialog = ->
     ui.dialog_cover = dialog_cover
 
   ui.updateSnippetList()
-  nav = $ '[role="navigation"]'
+  nav = $ '[role="navigation"], .XXuWB'
   scrollTop = document.body.scrollTop + document.documentElement.scrollTop
   ui.dialog.css('top',
     nav.offset().top + nav[0].offsetHeight - scrollTop)
@@ -340,7 +361,19 @@ ui.updateSnippetList = ->
       row.addClass 'disabled'
     list.append row
   
-$(document).on 'contextmenu', '[role="navigation"]', (e) ->
+$(document).on 'contextmenu', '[role="navigation"], .XXuWB', (e) ->
+  return if e.shiftKey
+  try
+    ui.showDialog()
+  catch ex
+    console.log ex.toString()
+
+  e.preventDefault()
+  e.stopImmediatePropagation()
+  return false
+
+$(document).on 'click', '.GM', (e) ->
+  return if e.shiftKey or not e.target.classList.contains('GM')
   try
     ui.showDialog()
   catch ex

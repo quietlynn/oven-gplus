@@ -370,7 +370,7 @@
       }
       columns.append(category);
     }
-    var nav = $('[role="navigation"]');
+    var nav = $.gplus.page().find('navBar');
     var scrollTop = document.body.scrollTop + document.documentElement.scrollTop
     dialog.css('top',
       nav.offset().top + nav[0].offsetHeight - scrollTop);

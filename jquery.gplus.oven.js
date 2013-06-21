@@ -398,7 +398,7 @@
       update : '.Tg.Sb',
       stream : 'div[guidedhelpid="streamcontent"]',
       refreshButton : '.Ri07Rc',
-      navBar : '[role="navigation"]',
+      navBar : '[role="navigation"], .XXuWB',
       commentArea : '.Lj.FE',
       newComment : '.hh.dw',
       comment : '.Ho.gx',
