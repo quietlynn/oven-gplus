@@ -382,7 +382,7 @@
   });
   
   var gotoTop = function () {
-    $('[role="navigation"]').doClick();
+    $.gplus.page().find('navBar').doClick();
   };
 
   // Make 'l' work at all time (not only when new posts are available).
