@@ -504,8 +504,6 @@
   };
   // "S" as in Google Reader. RIP Google Reader.
   $.gplus.keyboard.registerKey('S', shareThisPost);
-  // The old shortcut key for sharing. Going away soon.
-  $.gplus.keyboard.registerKey('t', shareThisPost);
   
   $.gplus.keyboard.addManual('Post', 'S', 'Share current post');
   
@@ -519,6 +517,7 @@
   
   $.gplus.keyboard.addManual('Post', 'm', 'Mute current post');
 
+  // Activity
   $.gplus.keyboard.registerKey('a', function () {
     var update = $.gplus.page().find('activeUpdate').first();
     if (update.length > 0) {
@@ -533,6 +532,21 @@
   });
   
   $.gplus.keyboard.addManual('Post', 'a', 'Show/hide activity on this post');
+
+  // auThor
+  $.gplus.keyboard.registerKey('t', function () {
+    var update = $.gplus.page().find('activeUpdate').first();
+    if (update.length > 0) {
+      var comment = update.getActiveComment();
+      if (comment.length > 0) {
+        comment.find('a[oid]').first().doClick();
+      } else {
+        update.find('a[oid]').first().doClick();
+      }
+    }
+  });
+  
+  $.gplus.keyboard.addManual('Post', 't', 'Visit the author of this post/comment');
 
   $.gplus.keyboard.registerKey('u', function () {
     var update = $.gplus.page().find('activeUpdate').first();
