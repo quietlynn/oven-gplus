@@ -474,7 +474,8 @@
       notificationFrameWrapper: '#gbwc',
       authorProfileLink: '.Sg.Ob',
       activityButton: '.rE',
-      flipCardButton: '.Lfr5Ie'
+      flipCardButton: '.Lfr5Ie',
+      clearNotification: '.Bd4lkf'
     },
     attrs : {
       userId : 'oid'

@@ -311,6 +311,23 @@
       characterData: false
     });
   });
+
+  if ($.gplus.page().find('clearNotification').length > 0) {
+    // We are in the notification frame.
+    $.gplus.keyboard.registerKey('?', function () {
+      // TODO: Show help in the notification frame.
+    });
+
+    $.gplus.keyboard.addManual('Global', '?', 'Open shortcut help');
+
+    $.gplus.keyboard.registerKey(';', function () {
+      $.gplus.page().find('clearNotification').doClick();
+    });
+
+    $.gplus.keyboard.addManual('Global', ';', 'Mark all notifications as read');
+
+    return;
+  }
   
   // Manual for G+ builtin
   $.gplus.keyboard.addManual('Global', '/', 'Search');
