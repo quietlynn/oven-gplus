@@ -375,6 +375,8 @@ $(document).on 'contextmenu', '[role="navigation"], .XXuWB', (e) ->
 $(document).on 'click', '.GM', (e) ->
   return if e.shiftKey or not e.target.classList.contains('GM')
   last = e.target.lastElementChild
+  while last.getAttribute('aria-hidden') == 'true'
+    last = last.previousElementSibling
   return if e.clientX <= last.offsetLeft + last.offsetWidth
   try
     ui.showDialog()
