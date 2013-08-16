@@ -182,7 +182,9 @@
       var a = $('<a/>');
       decorateLink(a, mediaArea, url, title);
       a.addClass('ext-inline-media-temp-link');
-      wrapper.last().append(a);
+      var dest = wrapper.last();
+      $('.ext-inline-media-temp-link', dest).remove();
+      dest.append(a);
 
       mediaArea
         .addClass('ext-inline-media-area')
