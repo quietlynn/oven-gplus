@@ -371,7 +371,7 @@
     bar = $(bar);
     if (bar.attr('data-ext-fuu')) return;
     var button = $('<div/>');
-    button.attr('role', 'button').attr('class', 'dk ext-fuu-button')
+    button.attr('role', 'button').attr('class', 'Dg ext-fuu-button')
     button.attr('style', 'text-align: center; font-weight: bold;');
     button.attr('title', settings.list[settings.selected].value).text(loc['fuuButtonText']);
     var newComment = $.gplus.wrap(bar).find('newComment');

@@ -326,6 +326,32 @@
 
     $.gplus.keyboard.addManual('Global', ';', 'Mark all notifications as read');
 
+    // Navigation among cards.
+    var handler = $.gplus.page().dynamicSelect('notificationCard', function (cards) {
+      $.gplus.page().stopDynamicSelect(handler);
+      cards.first().addClass('ext-keyboard-active-card');
+    });
+
+    $.gplus.keyboard.registerKey('j', function () {
+      var card = $('.ext-keyboard-active-card');
+      if (card.length == 0) card = $.gplus.page.find('notificationCard').first();
+      var nextCard = card.next();
+      if (nextCard.length > 0) {
+        card.removeClass('ext-keyboard-active-card');
+        nextCard.addClass('ext-keyboard-active-card');
+      }
+    });
+
+    $.gplus.keyboard.registerKey('j', function () {
+      var card = $('.ext-keyboard-active-card');
+      if (card.length == 0) card = $.gplus.page.find('notificationCard').first();
+      var nextCard = card.next();
+      if (nextCard.length > 0) {
+        card.removeClass('ext-keyboard-active-card');
+        nextCard.addClass('ext-keyboard-active-card');
+      }
+    });
+
     return;
   }
   
@@ -364,25 +390,25 @@
       '-moz-break-inside': 'avoid !important', // Not supported by Firefox, but added for the future.
       'break-inside': 'avoid !important'
     },
-    '.VVa': {
+    '.GRc': {
       'width': 'auto !important'
     }
   });
   
   $.gplus.keyboard.registerKey('?', function () {
-    var dialog = $('<div class="sbb ext-keyboard-custom-manual" role="alert"><div class="tbb">Keyboard shortcuts</div></div>');
+    var dialog = $('<div class="ERc ext-keyboard-custom-manual" role="alert"><div class="jFd">Keyboard shortcuts</div></div>');
     var columns = $('<div class="ext-keyboard-custom-manual-columns"/>');
     dialog.append(columns);
     
     for (var catName in man) {
       var page = man[catName];
-      var category = $('<table class="WVa"><tbody><tr><th></th><th class="XVa">{{catName}}</th></tr></tbody></table>');
-      category.find('.XVa').text(catName);
+      var category = $('<table class="HRc"><tbody><tr><th></th><th class="IRc">{{catName}}</th></tr></tbody></table>');
+      category.find('.IRc').text(catName);
       for (var i = 0; i < page.length; i++) {
         var entry = page[i];
-        var item = $('<tr><td class="VVa">{{entry.key}}</td><td class="UVa">{{entry.description}}</td></tr><tr>');
-        item.find('.VVa').text(entry.key);
-        item.find('.UVa').text(entry.description);
+        var item = $('<tr><td class="GRc">{{entry.key}}</td><td class="FRc">{{entry.description}}</td></tr><tr>');
+        item.find('.GRc').text(entry.key);
+        item.find('.FRc').text(entry.description);
         category.append(item);
       }
       columns.append(category);

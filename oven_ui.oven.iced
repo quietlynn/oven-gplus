@@ -51,6 +51,7 @@ ui.addStyle = ->
       height: auto !important;
       max-height: 80% !important;
       text-align: center;
+      z-index: 1101;
     }
 
     .ext-oven-ui-settings {
@@ -152,11 +153,11 @@ ui.addStyle = ->
       margin-top: -10px !important;
     }
 
-    .GM {
+    .Ri {
       cursor: pointer;
     }
 
-    .GM::after {
+    .Ri::after {
       content: "Manage Snippets";
       border-bottom: 2px solid transparent;
       color: #373737;
@@ -187,17 +188,17 @@ ui.addStyle = ->
 ui.showDialog = ->
   if not ui.dialog?
     dialog = $ '''
-      <div class="U-L Tk ext-oven-ui-dialog" tabindex="0" role="dialog">
-        <div class="U-L-Y">
-          <span class="U-L-Y-A">Oven Snippets</span>
+      <div class="H-q Zc ext-oven-ui-dialog" tabindex="0" role="dialog">
+        <div class="H-q-Q">
+          <span class="H-q-Q-f">Oven Snippets</span>
         </div>
-        <div class="U-L-x">
+        <div class="H-q-B">
           <div class="ext-oven-ui-actions">
-            <div role="button" class="c-b c-b-T ext-oven-ui-action-update">Update</div>
-            <div role="button" class="c-b c-b-T ext-oven-ui-action-install">Install Snippet</div>
-            <div role="button" class="c-b c-b-T ext-oven-ui-action-create">Create Snippet</div>
-            <div role="button" class="c-b c-b-T ext-oven-ui-action-panic ext-oven-ui-button-danger">PANIC</div>
-            <div role="button" class="c-b c-b-T ext-oven-ui-close ext-oven-ui-button-main">Close</div>
+            <div role="button" class="d-k-l b-c b-c-U ext-oven-ui-action-update">Update</div>
+            <div role="button" class="d-k-l b-c b-c-U ext-oven-ui-action-install">Install Snippet</div>
+            <div role="button" class="d-k-l b-c b-c-U ext-oven-ui-action-create">Create Snippet</div>
+            <div role="button" class="d-k-l b-c b-c-U ext-oven-ui-action-panic ext-oven-ui-button-danger">PANIC</div>
+            <div role="button" class="d-k-l b-c b-c-U ext-oven-ui-close ext-oven-ui-button-main">Close</div>
           </div>
           <div class="ext-oven-ui-settings">
             <div class="ext-oven-ui-snippet-list"></div>
@@ -205,7 +206,7 @@ ui.showDialog = ->
               <div class="ext-oven-ui-create-code" contenteditable="plaintext-only">
               </div>
               <p>
-                <button class="a-f-e c-b c-b-T ext-oven-ui-create-test ext-oven-ui-button-main">Test</button>
+                <button class="b-c-Da d-k-l b-c ext-oven-ui-create-test ext-oven-ui-button-main">Test</button>
               </p>
             </div>
             <div class="ext-oven-ui-notification"></div>
@@ -235,11 +236,11 @@ ui.showDialog = ->
 
     dialog.on 'click', '.ext-oven-ui-action-update', (e) ->
       e.target.disabled = true
-      $(e.target).toggleClass('c-b-da').toggleClass('c-b-E')
+      $(e.target).toggleClass('b-c-I')
       await oven.manager.sync defer(), 'bypass_cache'
       ui.notify 'Update complete. Please reload the page to apply the changes.'
       e.target.disabled = false
-      $(e.target).toggleClass('c-b-da').toggleClass('c-b-E')
+      $(e.target).toggleClass('b-c-I')
       ui.updateSnippetList()
 
     dialog.on 'click', '.ext-oven-ui-action-install', ->
@@ -320,7 +321,7 @@ ui.showDialog = ->
     ui.dialog_cover = dialog_cover
 
   ui.updateSnippetList()
-  nav = $ '[role="navigation"], .XXuWB'
+  nav = $ '.hJ.Ev'
   scrollTop = document.body.scrollTop + document.documentElement.scrollTop
   ui.dialog.css('top',
     nav.offset().top + nav[0].offsetHeight - scrollTop)
@@ -352,7 +353,7 @@ ui.updateSnippetList = ->
           <input type="checkbox" class="ext-oven-ui-snippet-enabled"/>
           Enable
         </label>
-        <button class="c-b c-b-T ext-oven-ui-snippet-remove">Remove</button>
+        <button class="d-k-l b-c b-c-U ext-oven-ui-snippet-remove">Remove</button>
       </span>
     '''
     if not data.disabled
@@ -361,7 +362,7 @@ ui.updateSnippetList = ->
       row.addClass 'disabled'
     list.append row
   
-$(document).on 'contextmenu', '[role="navigation"], .XXuWB', (e) ->
+$(document).on 'contextmenu', '.hJ.Ev', (e) ->
   return if e.shiftKey
   try
     ui.showDialog()
@@ -372,8 +373,8 @@ $(document).on 'contextmenu', '[role="navigation"], .XXuWB', (e) ->
   e.stopImmediatePropagation()
   return false
 
-$(document).on 'click', '.GM', (e) ->
-  return if e.shiftKey or not e.target.classList.contains('GM')
+$(document).on 'click', '.Ri', (e) ->
+  return if e.shiftKey or not e.target.classList.contains('Ri')
   last = e.target.lastElementChild
   while last.getAttribute('aria-hidden') == 'true'
     last = last.previousElementSibling
