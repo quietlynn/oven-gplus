@@ -656,8 +656,9 @@
   // Shortcut keys in G+ editor (not open for registration).
   
   // Ctrl+Enter = Submit
+  // Shift+Enter = Submit
   var editorKeyDown = function (e) {
-    if (e.ctrlKey && (e.keyCode === 10 || e.keyCode === 13)) {
+    if ((e.ctrlKey || e.shiftKey) && (e.keyCode === 10 || e.keyCode === 13)) {
       e.preventDefault();
       e.stopPropagation();
       $.gplus.wrap(e.currentTarget).closest(
