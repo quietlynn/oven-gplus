@@ -47,6 +47,7 @@ ui.addStyle = ->
     .ext-oven-ui-dialog {
       position: fixed !important;
       left: 30% !important;
+      top: 10% !important;
       width: 40% !important;
       height: auto !important;
       max-height: 80% !important;
@@ -188,11 +189,11 @@ ui.addStyle = ->
 ui.showDialog = ->
   if not ui.dialog?
     dialog = $ '''
-      <div class="H-q Zc ext-oven-ui-dialog" tabindex="0" role="dialog">
-        <div class="H-q-Q">
-          <span class="H-q-Q-f">Oven Snippets</span>
+      <div class="G-q Zc ext-oven-ui-dialog" tabindex="0" role="dialog">
+        <div class="G-q-O">
+          <span class="G-q-O-E">Oven Snippets</span>
         </div>
-        <div class="H-q-B">
+        <div class="G-q-B">
           <div class="ext-oven-ui-actions">
             <div role="button" class="d-k-l b-c b-c-U ext-oven-ui-action-update">Update</div>
             <div role="button" class="d-k-l b-c b-c-U ext-oven-ui-action-install">Install Snippet</div>
@@ -321,10 +322,6 @@ ui.showDialog = ->
     ui.dialog_cover = dialog_cover
 
   ui.updateSnippetList()
-  nav = $ '.rw.Uc'
-  scrollTop = document.body.scrollTop + document.documentElement.scrollTop
-  ui.dialog.css('top',
-    nav.offset().top + nav[0].offsetHeight - scrollTop)
   
   ui.dialog.show()
   ui.dialog_cover.show()
@@ -362,7 +359,7 @@ ui.updateSnippetList = ->
       row.addClass 'disabled'
     list.append row
   
-$(document).on 'contextmenu', '.rw.Uc', (e) ->
+$(document).on 'contextmenu', '.Nn', (e) ->
   return if e.shiftKey
   try
     ui.showDialog()

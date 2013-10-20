@@ -395,7 +395,7 @@
       asClass : function (name) {
         return $.gplus.selectors[name].replace(/\./g, ' ').trim();
       },
-      update : '.Qp.Va',
+      update : '.Yp.yt',
       stream : 'div[guidedhelpid="streamcontent"]',
       refreshButton : '.PZa',
       navBar : '.Nn',
@@ -430,10 +430,10 @@
       originalAuthorInfo : '.vA',
       anyAuthorInfo : '.Ir, .vA', // authorInfo + originalAuthorInfo
       proflinkWrapper : '.proflinkWrapper',
-      newCommentOpener : '.Js.Nt',
-      contentEditor : '.Lf',
-      newCommentSubmit : '.b-c-Da',
-      newCommentCancel: '.b-c-bb',
+      newCommentOpener : '.Dt.wu',
+      contentEditor : '.df',
+      newCommentSubmit : '.b-c-Ba',
+      newCommentCancel: '.b-c-R',
       shareButton: '[guidedhelpid="sharebutton"]',
       updateToolBar : '.Qg',
       whiteBarInToolbar : 'DEPRECATED',
@@ -461,7 +461,7 @@
       plusOne : '[g\\:entity]',
       postPlusOne : '[g\\:entity^="buzz:"]',
       commentPlusOne : '.EE',
-      activeUpdate: '.Zj',
+      activeUpdate: '.tk',
       notificationButton: '#gbgs1',
       sharePost: '.Dg',
       updateMenuOpener: '.Jv',
@@ -595,7 +595,7 @@
       activeUpdate : 'update',
       newComment : {
         openEditor : function (opt_callback) {
-          var opener = $($.gplus.selectors.newCommentOpener, this);
+          var opener = this.find($.gplus.selectors.newCommentOpener);
           
           if (opt_callback) {
             var update = $.gplus.wrap(opener).closest('update');
