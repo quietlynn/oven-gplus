@@ -153,11 +153,11 @@ ui.addStyle = ->
       margin-top: -10px !important;
     }
 
-    .Ri {
+    .Ima {
       cursor: pointer;
     }
 
-    .Ri::after {
+    .Ima::after {
       content: "Manage Snippets";
       border-bottom: 2px solid transparent;
       color: #373737;
@@ -321,7 +321,7 @@ ui.showDialog = ->
     ui.dialog_cover = dialog_cover
 
   ui.updateSnippetList()
-  nav = $ '.hJ.Ev'
+  nav = $ '.rw.Uc'
   scrollTop = document.body.scrollTop + document.documentElement.scrollTop
   ui.dialog.css('top',
     nav.offset().top + nav[0].offsetHeight - scrollTop)
@@ -362,7 +362,7 @@ ui.updateSnippetList = ->
       row.addClass 'disabled'
     list.append row
   
-$(document).on 'contextmenu', '.hJ.Ev', (e) ->
+$(document).on 'contextmenu', '.rw.Uc', (e) ->
   return if e.shiftKey
   try
     ui.showDialog()
@@ -373,8 +373,8 @@ $(document).on 'contextmenu', '.hJ.Ev', (e) ->
   e.stopImmediatePropagation()
   return false
 
-$(document).on 'click', '.Ri', (e) ->
-  return if e.shiftKey or not e.target.classList.contains('Ri')
+$(document).on 'click', '.Ima', (e) ->
+  return if e.shiftKey or not e.target.classList.contains('Ima')
   last = e.target.lastElementChild
   while last.getAttribute('aria-hidden') == 'true'
     last = last.previousElementSibling
