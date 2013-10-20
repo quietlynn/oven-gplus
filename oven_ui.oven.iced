@@ -359,7 +359,7 @@ ui.updateSnippetList = ->
       row.addClass 'disabled'
     list.append row
   
-$(document).on 'contextmenu', '.Nn', (e) ->
+$(document).on 'contextmenu', '.rw.Uc', (e) ->
   return if e.shiftKey
   try
     ui.showDialog()

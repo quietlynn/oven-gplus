@@ -174,6 +174,14 @@
       target.dispatchEvent(evt);
     });
   };
+  $.fn.doKeydown = function (keycode) {
+    if (!keycode) keycode = 69;
+    return this.each(function (_, target) {
+      var evt = target.ownerDocument.createEvent('KeyboardEvent');
+      evt.initEvent('keydown', true, true, window, 0, 0, 0, 0, keycode, 0);
+      target.dispatchEvent(evt);
+    });
+  };
   
   // Mine-click plugin (handles left+right click)
   (function ($) {
@@ -397,8 +405,8 @@
       },
       update : '.Yp.yt',
       stream : 'div[guidedhelpid="streamcontent"]',
-      refreshButton : '.PZa',
-      navBar : '.Nn',
+      refreshButton : '.JFd',
+      navBar : '.rw.Uc',
       commentArea : '.DL',
       newComment : '.bj.Tt',
       comment : '.tk.nv',
@@ -438,7 +446,7 @@
       updateToolBar : '.Qg',
       whiteBarInToolbar : 'DEPRECATED',
       profileNameContainer : 'DEPRECATED',
-      mediaArea : '.Rf',
+      mediaArea : '.Nf',
       sharedPhoto : '.Bk',
       sharedExternalLink : '.ot-anchor',
       sharedWebpageTitle : '.zg',
@@ -463,16 +471,16 @@
       commentPlusOne : '.EE',
       activeUpdate: '.tk',
       notificationButton: '#gbgs1',
-      sharePost: '.Dg',
-      updateMenuOpener: '.Jv',
-      updateMenu: '.iH',
+      sharePost: '.Ut',
+      updateMenuOpener: '.if',
+      updateMenu: '.YH',
       updateMenuReady: '.d-r',
-      updateMenuMute: '.v2',
-      unmute: '.CV',
+      updateMenuMute: '.G3',
+      unmute: '.Z2',
       postEditCancel: '.b-c-U',
       notificationFrameWrapper: '#gbwc',
       authorProfileLink: '.Cu.Tb',
-      activityButton: '.RJ',
+      activityButton: '.LK',
       flipCardButton: '.cu',
       clearNotification: '.MCa',
       notificationCard: '.Mra'

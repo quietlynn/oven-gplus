@@ -376,6 +376,7 @@
   $.gplus.addStyle({
     '.ext-keyboard-custom-manual': {
       'left': '0 !important',
+      'top': '10% !important',
       'width': '100% !important',
       'height': 'auto !important',
       'bottom': '0 !important',
@@ -390,33 +391,29 @@
       '-moz-break-inside': 'avoid !important', // Not supported by Firefox, but added for the future.
       'break-inside': 'avoid !important'
     },
-    '.GRc': {
+    '.sUc': {
       'width': 'auto !important'
     }
   });
   
   $.gplus.keyboard.registerKey('?', function () {
-    var dialog = $('<div class="ERc ext-keyboard-custom-manual" role="alert"><div class="jFd">Keyboard shortcuts</div></div>');
+    var dialog = $('<div class="qUc ext-keyboard-custom-manual" role="alert"><div class="MId">Keyboard shortcuts</div></div>');
     var columns = $('<div class="ext-keyboard-custom-manual-columns"/>');
     dialog.append(columns);
     
     for (var catName in man) {
       var page = man[catName];
-      var category = $('<table class="HRc"><tbody><tr><th></th><th class="IRc">{{catName}}</th></tr></tbody></table>');
-      category.find('.IRc').text(catName);
+      var category = $('<table class="tUc"><tbody><tr><th></th><th class="uUc">{{catName}}</th></tr></tbody></table>');
+      category.find('.uUc').text(catName);
       for (var i = 0; i < page.length; i++) {
         var entry = page[i];
-        var item = $('<tr><td class="GRc">{{entry.key}}</td><td class="FRc">{{entry.description}}</td></tr><tr>');
-        item.find('.GRc').text(entry.key);
-        item.find('.FRc').text(entry.description);
+        var item = $('<tr><td class="sUc">{{entry.key}}</td><td class="rUc">{{entry.description}}</td></tr><tr>');
+        item.find('.sUc').text(entry.key);
+        item.find('.rUc').text(entry.description);
         category.append(item);
       }
       columns.append(category);
     }
-    var nav = $.gplus.page().find('navBar');
-    var scrollTop = document.body.scrollTop + document.documentElement.scrollTop
-    dialog.css('top',
-      nav.offset().top + nav[0].offsetHeight - scrollTop);
     dialog.appendTo('body');
     // Press any key to dismiss.
     return function () {
@@ -425,7 +422,16 @@
   });
   
   var gotoTop = function () {
-    $.gplus.page().find('navBar').doClick();
+    var page = $.gplus.page();
+    /* Not working :
+    var i = page.find('update').index(page.find('activeUpdate'));
+    for (; i >= 0; i--) {
+      var evt = page[0].ownerDocument.createEvent('KeyboardEvent');
+      evt.initEvent('keydown', true, true, window, 0, 0, 0, 0, 75, 0);
+      document.dispatchEvent(evt);
+    }
+    */
+    page.find('navBar').doClick();
   };
 
   // Make 'l' work at all time (not only when new posts are available).
@@ -598,7 +604,7 @@
     }
   });
 
-  $.gplus.keyboard.registerKey('I', function () {
+  $.gplus.keyboard.registerKey('e', function () {
     var en = null;
     var update = $.gplus.page().find('activeUpdate').first();
     if (update.length > 0) { 
@@ -618,7 +624,7 @@
       return false;
     }
   });
-  $.gplus.keyboard.addManual('Post', 'I', 'Open a link in this post/comment');
+  $.gplus.keyboard.addManual('Post', 'e', 'Open a link in this post/comment');
 
   $.gplus.keyboard.addManual('Post', 'u', 'Set focus on the parent post');
 
