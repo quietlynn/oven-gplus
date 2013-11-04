@@ -446,10 +446,10 @@
     if ($('.gb_gbsh').length > 0) {
       gotoTop();
       setTimeout(function () {
-        $('#gbg3').doClick();
+        $($.gplus.selectors.navShareButton).doClick();
       }, 200);
     } else {
-      $('#gbg3').doClick();
+      $($.gplus.selectors.navShareButton).doClick();
     }
   });
   

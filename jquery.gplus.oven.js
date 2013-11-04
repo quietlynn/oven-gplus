@@ -434,7 +434,7 @@
       commentCollapseButton : '.d-s.Po.Fp',
       toggleButton : '.d-s.cj, .d-s.Po', // postToggleButton + commentToggleButton
       originalPostLink : '.pg',
-      authorInfo : '.Ir',
+      authorInfo : '.ys',
       originalAuthorInfo : '.vA',
       anyAuthorInfo : '.Ir, .vA', // authorInfo + originalAuthorInfo
       proflinkWrapper : '.proflinkWrapper',
@@ -462,15 +462,15 @@
       eventText : '.Cv',
       eventDetails : '.Bv',
       eventTitle : '.Cv',
-      mentionButton : '.gk',
-      mentionPrefix : '.uP',
+      mentionButton : '.sk',
+      mentionPrefix : '.jP',
       newUpdate : '[guidedhelpid="sharebox"]',
       closedNewUpdate : '[guidedhelpid="sharebox_launcher"]',
       plusOne : '[g\\:entity]',
       postPlusOne : '[g\\:entity^="buzz:"]',
       commentPlusOne : '.EE',
       activeUpdate: '.tk',
-      notificationButton: '#gbgs1',
+      notificationButton: '.gb_va .gb_n',
       sharePost: '.Ut',
       updateMenuOpener: '.if',
       updateMenu: '.YH',
@@ -479,11 +479,12 @@
       unmute: '.Z2',
       postEditCancel: '.b-c-U',
       notificationFrameWrapper: '#gbwc',
-      authorProfileLink: '.Cu.Tb',
+      authorProfileLink: '.tv.Ub',
       activityButton: '.LK',
       flipCardButton: '.cu',
       clearNotification: '.MCa',
-      notificationCard: '.Mra'
+      notificationCard: '.Mra',
+      navShareButton: '.gb_7a .gb_n'
     },
     attrs : {
       userId : 'oid'
