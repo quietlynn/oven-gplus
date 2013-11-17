@@ -224,20 +224,6 @@
     newComment.bind('contextmenu', newCommentContextMenu);
   });
   
-  var editorKeyPress = function (e) {
-    if (e.ctrlKey && (e.keyCode === 10 || e.keyCode === 13)) {
-      e.preventDefault();
-      e.stopPropagation();
-      $.gplus.wrap(e.currentTarget).closest(
-          $.gplus.selectors.combine('update', 'newUpdate')
-      ).find('newCommentSubmit').doClick();
-    }
-  };
-  
-  $.gplus.page().dynamicSelect('contentEditor', function (editor) {
-    editor.bind('keypress', editorKeyPress);
-  });
-  
   if (oven.manager.has('org.quietmusic.project.gplus.keyboard')) {
     $.gplus.keyboard.registerKey('r', function () {
       var update = $.gplus.page().find('activeUpdate').first();
@@ -252,5 +238,21 @@
         return false;
       }
     }); 
+  } else {
+    var editorKeyDown = function (e) {
+      if ((e.ctrlKey || e.shiftKey) && (e.keyCode === 10 || e.keyCode === 13)) {
+        e.preventDefault();
+        e.stopPropagation();
+        $.gplus.wrap(e.currentTarget).closest(
+            $.gplus.selectors.combine('update', 'newUpdate')
+        ).find(
+            $.gplus.selectors.combine('newCommentSubmit', 'shareButton')
+        ).doClick();
+      }
+    };
+
+    $.gplus.page().dynamicSelect('contentEditor', function (editor) {
+      editor.keydown(editorKeyDown);
+    });
   }
 })();
