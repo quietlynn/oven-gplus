@@ -470,7 +470,7 @@
       postPlusOne : '[g\\:entity^="buzz:"]',
       commentPlusOne : '.EE',
       activeUpdate: '.tk',
-      notificationButton: '.gb_va .gb_n',
+      notificationButton: '[guidedhelpid="gbniphid"] .gb_q',
       sharePost: '.Ut',
       updateMenuOpener: '.if',
       updateMenu: '.YH',
