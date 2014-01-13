@@ -240,14 +240,20 @@
     }); 
   } else {
     var editorKeyDown = function (e) {
+      // Ctrl+Enter = Submit
+      // Shift+Enter = Submit
+      // (Copied from gplus.keyboard.oven.js)
       if ((e.ctrlKey || e.shiftKey) && (e.keyCode === 10 || e.keyCode === 13)) {
         e.preventDefault();
         e.stopPropagation();
-        $.gplus.wrap(e.currentTarget).closest(
-            $.gplus.selectors.combine('update', 'newUpdate')
-        ).find(
-            $.gplus.selectors.combine('newCommentSubmit', 'shareButton')
-        ).doClick();
+        var update = $.gplus.wrap(e.currentTarget).closest(
+          $.gplus.selectors.combine('update', 'newUpdate')
+        );
+        if (update.is('newUpdate')) {
+          update.find($.gplus.selectors.combine('newUpdateSubmit')).doClick();
+        } else {
+          update.find($.gplus.selectors.combine('newCommentSubmit')).doClick();
+        }
       }
     };
 

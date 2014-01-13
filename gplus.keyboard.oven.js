@@ -667,11 +667,14 @@
     if ((e.ctrlKey || e.shiftKey) && (e.keyCode === 10 || e.keyCode === 13)) {
       e.preventDefault();
       e.stopPropagation();
-      $.gplus.wrap(e.currentTarget).closest(
+      var update = $.gplus.wrap(e.currentTarget).closest(
           $.gplus.selectors.combine('update', 'newUpdate')
-      ).find(
-        $.gplus.selectors.combine('newCommentSubmit', 'shareButton')
-      ).doClick();
+      );
+      if (update.is('newUpdate')) {
+        update.find($.gplus.selectors.combine('newUpdateSubmit')).doClick();
+      } else {
+        update.find($.gplus.selectors.combine('newCommentSubmit')).doClick();
+      }
     } else if (e.keyCode === 27) {
       e.preventDefault();
       e.stopPropagation();
