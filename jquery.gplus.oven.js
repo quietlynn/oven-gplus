@@ -409,7 +409,7 @@
       navBar : '.rw.Uc',
       commentArea : '.DL',
       newComment : '.bj.Tt',
-      comment : '.tk.nv',
+      comment : '.Ik.Wv',
       dateTime : '.Vg',
       postDateTime : '.Du.TK',
       sharingContainer : '.Cca',
@@ -469,8 +469,9 @@
       closedNewUpdate : '[guidedhelpid="sharebox_launcher"]',
       plusOne : '[g\\:entity]',
       postPlusOne : '[g\\:entity^="buzz:"]',
-      commentPlusOne : '.EE',
+      commentPlusOne : '.Ae',
       activeUpdate: '.tk',
+      activeComment: '.EG',
       notificationButton: '[guidedhelpid="gbniphid"] .gb_q',
       sharePost: '.Ut',
       updateMenuOpener: '.if',
@@ -551,7 +552,7 @@
           return this;
         },
         getActiveComment : function () {
-          return $.gplus.wrap(document.activeElement).closest('comment');
+          return this.find('activeComment');
         },
         share : function () {
           this.find('sharePost').doClick();
@@ -660,6 +661,7 @@
           return this;
         }
       },
+      activeComment : 'comment',
       mention : {
         userName : function () {
           return $('a', this).text();

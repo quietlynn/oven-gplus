@@ -175,6 +175,12 @@ ui.addStyle = ->
       white-space: nowrap;
       border-color: #53a93f;
     }
+
+    .kCd.Jse:after {
+      content: "Manage Snippets";
+      color: #737373;
+      padding: 12px 0 0 30px;
+    }
   '''
 
   if typeof(GM_addStyle) == 'undefined'

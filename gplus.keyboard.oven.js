@@ -366,6 +366,8 @@
   $.gplus.keyboard.addManual('Navigation', 'n', 'Next comment on current post');
   $.gplus.keyboard.addManual('Navigation', 'p', 'Previous comment on current post');
   $.gplus.keyboard.addManual('Navigation', 'l', 'Load new posts and go to the top');
+  $.gplus.keyboard.addManual('Post', 'o', 'Expand/collapse current post');
+  $.gplus.keyboard.addManual('Post', 'v', 'View attachment');
   $.gplus.keyboard.addManual('Post', 'r', 'Reply current post');
   $.gplus.keyboard.addManual('Global', 'Esc', 'Close popups');
   
