@@ -470,6 +470,7 @@
       plusOne : '[g\\:entity]',
       postPlusOne : '[g\\:entity^="buzz:"]',
       commentPlusOne : '.Ae',
+      commentEdit : '.WJ',
       activeUpdate: '.tk',
       activeComment: '.EG',
       notificationButton: '[guidedhelpid="gbniphid"] .gb_q',
@@ -478,8 +479,10 @@
       updateMenu: '.YH',
       updateMenuReady: '.d-r',
       updateMenuMute: '.G3',
+      updateMenuEdit: '.BF',
       unmute: '.Z2',
-      postEditCancel: '.b-c-U',
+      postEditSubmit: '.b-c-U',
+      postEditCancel: '.b-c-R',
       notificationFrameWrapper: '#gbwc',
       authorProfileLink: '.tv.Ub',
       activityButton: '.LK',
@@ -592,7 +595,13 @@
             this.mute();
           }
           return this;
-        }
+        },
+        edit : function () {
+          this.openMenu(function (menu) {
+            menu.find('updateMenuEdit').doClick();
+          });
+          return this;
+        },
       },
       post : {
         isMainPost : function () {
@@ -659,7 +668,11 @@
         plusOne : function () {
           this.find('commentPlusOne').doClick();
           return this;
-        }
+        },
+        edit : function () {
+          this.find('commentEdit').doClick();
+          return this;
+        },
       },
       activeComment : 'comment',
       mention : {

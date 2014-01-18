@@ -602,33 +602,26 @@
   $.gplus.keyboard.registerKey('u', function () {
     var update = $.gplus.page().find('activeUpdate').first();
     if (update.length > 0) {
-      update.focus().doKeypress('j').doKeypress('k');
+      update.focus().doKeypress('j');
+      setTimeout(function () {
+        update.doKeypress('k');
+      }, 1000);
     }
   });
+  $.gplus.keyboard.addManual('Post', 'u', 'Set focus on the parent post');
 
   $.gplus.keyboard.registerKey('e', function () {
-    var en = null;
     var update = $.gplus.page().find('activeUpdate').first();
     if (update.length > 0) { 
       var comment = update.getActiveComment();
       if (comment.length > 0) {
-        en = comment.find('content').find('a').first();
+        comment.edit();
       } else {
-        var mediaArea = update.find('mediaArea');
-        var en = mediaArea.find('a[rel="nofollow"]').first();
-        if (!en) en = mediaArea.find('a').first();
-        if (!en) en = update.find('postContent').find('a').first();
+        update.edit();
       }
     }
-    if (en) {
-      en.doClick();
-    } else {
-      return false;
-    }
   });
-  $.gplus.keyboard.addManual('Post', 'e', 'Open a link in this post/comment');
-
-  $.gplus.keyboard.addManual('Post', 'u', 'Set focus on the parent post');
+  $.gplus.keyboard.addManual('Post', 'e', 'Edit post/comment');
 
   // Enable n,p in Notification frame. (G+ bug?)
   // TODO: Handle comment expansion.
@@ -672,10 +665,13 @@
       var update = $.gplus.wrap(e.currentTarget).closest(
           $.gplus.selectors.combine('update', 'newUpdate')
       );
-      if (update.is('newUpdate')) {
-        update.find($.gplus.selectors.combine('newUpdateSubmit')).doClick();
-      } else {
-        update.find($.gplus.selectors.combine('newCommentSubmit')).doClick();
+      if (update.length > 0) {
+        if (update.is('newUpdate')) {
+          update.find($.gplus.selectors.combine('newUpdateSubmit',
+                                                'postEditSubmit')).doClick();
+        } else {
+          update.find('newCommentSubmit').doClick();
+        }
       }
     } else if (e.keyCode === 27) {
       e.preventDefault();

@@ -232,12 +232,12 @@
         if (comment.length > 0) {
           comment.find('authorProfileLink').contextmenu();
         } else {
-          update.find('authorInfo').find('authorProfileLink').contextmenu(); 
+          update.find('authorInfo').find('authorProfileLink').contextmenu();
         }
       } else {
         return false;
       }
-    }); 
+    });
   } else {
     var editorKeyDown = function (e) {
       // Ctrl+Enter = Submit
@@ -247,12 +247,15 @@
         e.preventDefault();
         e.stopPropagation();
         var update = $.gplus.wrap(e.currentTarget).closest(
-          $.gplus.selectors.combine('update', 'newUpdate')
+            $.gplus.selectors.combine('update', 'newUpdate')
         );
-        if (update.is('newUpdate')) {
-          update.find($.gplus.selectors.combine('newUpdateSubmit')).doClick();
-        } else {
-          update.find($.gplus.selectors.combine('newCommentSubmit')).doClick();
+        if (update.length > 0) {
+          if (update.is('newUpdate')) {
+            update.find($.gplus.selectors.combine('newUpdateSubmit',
+                                                  'postEditSubmit')).doClick();
+          } else {
+            update.find('newCommentSubmit').doClick();
+          }
         }
       }
     };
