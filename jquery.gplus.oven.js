@@ -483,13 +483,13 @@
       unmute: '.Z2',
       postEditSubmit: '.b-c-U',
       postEditCancel: '.b-c-R',
-      notificationFrameWrapper: '#gbwc',
+      notificationFrameWrapper: '#gbsfw',
       authorProfileLink: '.tv.Ub',
       activityButton: '.LK',
       flipCardButton: '.cu',
       clearNotification: '.MCa',
       notificationCard: '.Mra',
-      navShareButton: '.gb_7a .gb_n'
+      navShareButton: '.gb_db .gb_q'
     },
     attrs : {
       userId : 'oid'
