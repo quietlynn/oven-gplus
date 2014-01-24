@@ -3,14 +3,8 @@
     Copyright (C) 2013 Jingqin Lynn
     
     Includes jQuery
-    Copyright 2011, John Resig
-    Dual licensed under the MIT or GPL Version 2 licenses.
+    Copyright 2014 jQuery Foundation and other contributors
     http://jquery.org/license
-
-    Includes Sizzle.js
-    http://sizzlejs.com/
-    Copyright 2011, The Dojo Foundation
-    Released under the MIT, BSD, and GPL Licenses.
     
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -30,7 +24,7 @@
 /*
   OVEN::name jquery.gplus
   OVEN::display jQuery Google+ Plugin
-  OVEN::require com.jquery https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
+  OVEN::require com.jquery https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js
 */
 
 (function () {
@@ -479,7 +473,11 @@
       updateMenu: '.YH',
       updateMenuReady: '.d-r',
       updateMenuMute: '.G3',
+      updateMenuUnmute: '.g5',
       updateMenuEdit: '.BF',
+      updateMenuItem: '.d-A',
+      updateMenuItemActive: '.d-A-X.d-A-yb',
+      updateMenuItemText: '.d-A-B',
       unmute: '.Z2',
       postEditSubmit: '.b-c-U',
       postEditCancel: '.b-c-R',
@@ -562,37 +560,76 @@
           return this;
         },
         openMenu : function (opt_callback) {
-          if (opt_callback) {
-            var that = this;
-            var handler = this.dynamicSelect('updateMenu', function (menu) {
-              that.stopDynamicSelect(handler);
-              // TODO: Use MutationObserver.
-              var it = setInterval(function () {
-                if (menu.is('updateMenuReady')) {
-                  clearInterval(it);
-                  opt_callback(menu);
-                }
-              }, 100)
-            });
-          }
-          
+          if (opt_callback) this.dynamicSelectMenu(opt_callback);
           this.find('updateMenuOpener').doClick();
           return this;
+        },
+        dynamicSelectMenu : function (callback) {
+          var that = this;
+          var handler = this.dynamicSelect('updateMenu', function (menu) {
+            that.stopDynamicSelect(handler);
+            // TODO: Use MutationObserver.
+            var it = setInterval(function () {
+              if (menu.is('updateMenuReady')) {
+                clearInterval(it);
+                callback(menu);
+              }
+            }, 100)
+          });
+        },
+        addMenuItem : function (menuText, menuClass, onClick) {
+          var menuItem = $('<div/>');
+          menuItem.addClass($.gplus.selectors.asClass('updateMenuItem'));
+          if (menuClass) menuItem.addClass(menuClass)
+          menuItem.attr('role', 'menuitem');
+          menuItem.attr('style', '-webkit-user-select: none;');
+          var menuTextDiv = $('<div/>');
+          menuTextDiv.addClass($.gplus.selectors.asClass('updateMenuItemText'));
+          menuTextDiv.attr('style', '-webkit-user-select: none;');
+          menuTextDiv.text(menuText);
+          menuTextDiv.appendTo(menuItem);
+
+          var that = this;
+          menuItem.click(function () {
+            that.find('updateMenuOpener').doClick();
+            onClick(menuItem);
+          }).mouseenter(function () {
+            menuItem.addClass(
+                $.gplus.selectors.asClass('updateMenuItemActive'));
+            
+          }).mouseleave(function () {
+            menuItem.removeClass(
+                $.gplus.selectors.asClass('updateMenuItemActive'));
+          });
+          this.dynamicSelectMenu(function (menu) {
+            menuItem.appendTo(menu);
+          });
         },
         mute : function () {
           this.openMenu(function (menu) {
             menu.find('updateMenuMute').doClick();
-          })
+          });
         },
         unmute: function () {
-          this.find('unmute').doClick();
+          var unMute = this.find('unmute');
+          if (unMute.length > 0) {
+            unMute.doClick();
+          } else {
+            this.openMenu(function (menu) {
+              menu.find('updateMenuUnmute').doClick();
+            });
+          }
         },
         toggleMute: function () {
           var unmute = this.find('unmute');
           if (unmute.length > 0) {
             unmute.doClick();
           } else {
-            this.mute();
+            this.openMenu(function (menu) {
+              if (menu.find('updateMenuMute').doClick().length == 0) {
+                menu.find('updateMenuUnmute').doClick();
+              }
+            });
           }
           return this;
         },
