@@ -293,9 +293,8 @@
   var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
   
   $.gplus.page().dynamicSelect('notificationFrameWrapper', function (w) {
-    var el = w[0];
     new MutationObserver(function() {
-      if (el.style.display === 'none') {
+      if (!w.is('notificationFrameWrapperShown')) {
         window.focus();
         if (document.activeElement == w.find('iframe')[0]) {
           var scroll = document.documentElement.scrollTop;
@@ -303,9 +302,9 @@
           document.documentElement.scrollTop = scroll;
         }
       } else {
-        el.querySelector('iframe').contentWindow.focus();
+        e.find('iframe').contentWindow.focus();
       }
-    }).observe(el, {
+    }).observe(w[0], {
       attributes: true,
       childList: false,
       characterData: false

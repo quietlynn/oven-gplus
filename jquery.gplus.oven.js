@@ -482,12 +482,13 @@
       postEditSubmit: '.b-c-U',
       postEditCancel: '.b-c-R',
       notificationFrameWrapper: '#gbsfw',
+      notificationFrameWrapperShown: '.gb_ia',
       authorProfileLink: '.tv.Ub',
       activityButton: '.LK',
       flipCardButton: '.cu',
       clearNotification: '.MCa',
       notificationCard: '.Mra',
-      navShareButton: '.gb_db .gb_q'
+      navShareButton: '.gb_db .gb_r, .gb_eb .gb_r'
     },
     attrs : {
       userId : 'oid'
