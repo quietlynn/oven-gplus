@@ -301,8 +301,6 @@
           document.body.focus();
           document.documentElement.scrollTop = scroll;
         }
-      } else {
-        e.find('iframe').contentWindow.focus();
       }
     }).observe(w[0], {
       attributes: true,
@@ -622,37 +620,6 @@
   });
   $.gplus.keyboard.addManual('Post', 'e', 'Edit post/comment');
 
-  // Enable n,p in Notification frame. (G+ bug?)
-  // TODO: Handle comment expansion.
-  if (document.body.classList.contains('u0b')) {
-    var navComment = function (direction) {
-      var update = $.gplus.page().find('activeUpdate').first();
-      if (update.length > 0) {
-        var comment = update.getActiveComment();
-        if (comment.length == 0) {
-          comment = update.find('comment').first();
-        } else {
-          var nextComment;
-          if (direction == 'next') {
-            nextComment = comment.next();
-          } else {
-            nextComment = comment.prev();
-          }
-          if (nextComment.length > 0) {
-            comment = nextComment;
-          }
-        }
-        comment.focus();
-        comment.find('button, [role="button"]').show();
-      }
-    }
-    $.gplus.keyboard.registerKey('n', function () {
-      navComment('next');
-    });
-    $.gplus.keyboard.registerKey('p', function () {
-      navComment('prev');
-    });
-  }
   // Shortcut keys in G+ editor (not open for registration).
   
   // Ctrl+Enter = Submit
