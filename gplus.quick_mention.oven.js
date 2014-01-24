@@ -157,7 +157,6 @@
     e.stopPropagation();
     e.preventDefault();
     
-    try {
     var el = $(e.currentTarget);
     var details = extractMentionDetailsFrom(el);
     var sel = window.getSelection();
@@ -170,7 +169,9 @@
       
       if (editor.length === 0) {
         editor = $.gplus.page().find('contentEditor').filter(function (_, ed) {
-          return $.gplus.wrap(ed).closest('closedNewUpdate').length === 0;
+          return $.gplus.wrap(ed).closest(
+              $.gplus.selector.combine('closedNewUpdate',
+                                      '[aria-hidden="true"]')).length === 0;
         }).last();
         
         if (editor.length > 0) node = editor;
@@ -195,10 +196,10 @@
       if (newComment.length === 0) return;
       insertMentionToNewComment(details, newComment);
     } else {
-      insertMention(node[0], sel.anchorOffset, details, editor.attr('contenteditable'));
+      insertMention(node[0], sel.anchorOffset, details,
+                    editor.attr('contenteditable'));
       editor.doKeypress();
     }
-    } catch(e) { console.log(e.toString()); }
   };
   
   var selector = '[oid], [o]';
