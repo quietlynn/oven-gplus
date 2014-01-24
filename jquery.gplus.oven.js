@@ -473,7 +473,7 @@
       commentEdit : '.WJ',
       activeUpdate: '.tk',
       activeComment: '.EG',
-      notificationButton: '[guidedhelpid="gbniphid"] .gb_q',
+      notificationButton: '[guidedhelpid="gbniphid"] .gb_r',
       sharePost: '.Ut',
       updateMenuOpener: '.if',
       updateMenu: '.YH',
