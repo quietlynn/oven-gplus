@@ -596,16 +596,18 @@
   
   $.gplus.keyboard.addManual('Post', 't', 'Visit the author of this post/comment');
 
-  $.gplus.keyboard.registerKey('u', function () {
-    var update = $.gplus.page().find('activeUpdate').first();
-    if (update.length > 0) {
-      update.focus().doKeypress('j');
-      setTimeout(function () {
-        update.doKeypress('k');
-      }, 1000);
-    }
-  });
-  $.gplus.keyboard.addManual('Post', 'u', 'Set focus on the parent post');
+  if ($('#notify-widget-pane').length == 0) {
+    $.gplus.keyboard.registerKey('u', function () {
+      var update = $.gplus.page().find('activeUpdate').first();
+      if (update.length > 0) {
+        update.focus().doKeypress('j');
+        setTimeout(function () {
+          update.doKeypress('k');
+        }, 1000);
+      }
+    });
+    $.gplus.keyboard.addManual('Post', 'u', 'Set focus on the parent post');
+  }
 
   $.gplus.keyboard.registerKey('e', function () {
     var update = $.gplus.page().find('activeUpdate').first();
