@@ -466,7 +466,8 @@
       commentPlusOne : '.Ae',
       commentEdit : '.WJ',
       singleUpdate: '.lNd.Ic',
-      activeUpdate: '.tk, .lNd.Ic .Yp.yt',
+      // .tk + singleUpdate update + notificationCardActive update
+      activeUpdate: '.tk, .lNd.Ic .Yp.yt, .l4a.hga:not([role]):not([style]) .Yp.yt, .l4a.hga:not([role])[style=""] .Yp.yt',
       activeComment: '.EG',
       notificationButton: '[guidedhelpid="gbniphid"] .gb_r',
       sharePost: '.Ut',
@@ -488,7 +489,9 @@
       activityButton: '.LK',
       flipCardButton: '.cu',
       clearNotification: '.MCa',
-      notificationCard: '.Mra',
+      notificationCard: '.l4a.hga[role="button"]',
+      notificationCardExpanded: '.l4a.hga:not([role])',
+      notificationCardActive: '.l4a.hga:not([role]):not([style]), .l4a.hga:not([role])[style=""]',
       navShareButton: '.gb_db .gb_r, .gb_eb .gb_r'
     },
     attrs : {
