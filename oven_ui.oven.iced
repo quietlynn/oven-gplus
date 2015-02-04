@@ -272,7 +272,7 @@ ui.showDialog = ->
       data.name ?= 'oven.temp.testcode'
       data.display ?= 'Test Code [added by Oven Snippet Creater]'
       if data.missing?
-        await
+        await ->
           try
             oven.manager.install_all data.missing, defer(), 'bypass_cache'
           catch ex
